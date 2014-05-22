@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "Sample post"
+categories: blog coding
+tags: jekyll practice 1
+---
+
+new post
