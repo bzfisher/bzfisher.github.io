@@ -44,7 +44,7 @@ a:visited { color: #a0a; }
 }
 
 .posts span {
-  color: #aaa;
+  color: #CCCCCC;
   font-family: Monaco, "Courier New", monospace;
   font-size: 80%;
 }
@@ -69,12 +69,13 @@ a:visited { color: #a0a; }
 }
 
 .title {
+  font-size: 150%;
   display: inline-block;
   margin-bottom: 2em;
 }
 
 .title a {
-  color: #a00;
+  color: #DE0000;
 }
 
 .title a:hover {
