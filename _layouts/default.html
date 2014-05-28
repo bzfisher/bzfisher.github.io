@@ -12,32 +12,49 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/main.css">
 
+        <!-- Responsive website -->
+        <link rel="stylesheet" href="/css/skeleton.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
 
         <div class="site">
           <div class="header">
-            <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-            <a class="extra" href="/about.html">about</a>
-          </div>
-
-          {{ content }}
-
-          <div class="footer">
-            <div class="contact">
-              <p>
-                Ben Fisher<br />
-                me@bfisher.ca
-              </p>
-            </div>
-            <div class="contact">
-              <p>
-              <a href="http://ca.linkedin.com/in/bzfisher/">linkedin</a><br />
-                <a href="https://github.com/bzfisher">github</a><br />
-                <a href="https://twitter.com/mrbenfisher">twitter</a><br />
-              </p>
+            <div class="container">
+              <div class="offset-by-three ten columns">
+                <h1 class="title"><a href="/">{{ site.name }}</a></h1>
+                <a class="extra" href="/about.html">about</a>
+              </div>
             </div>
           </div>
+
+          <div class="container">
+            <div class="offset-by-three ten columns">
+              {{ content }}
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="offset-by-three ten columns">
+
+              <div class="footer">
+                <div class="contact">
+                  <p>
+                    Ben Fisher<br />
+                    me@bfisher.ca
+                  </p>
+                </div>
+                <div class="contact">
+                  <p>
+                  <a href="http://ca.linkedin.com/in/bzfisher/">linkedin</a><br />
+                    <a href="https://github.com/bzfisher">github</a><br />
+                    <a href="https://twitter.com/mrbenfisher">twitter</a><br />
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
     </body>
