@@ -21,7 +21,9 @@ app.controller('injectCtrl', [$scope, function($scope){
 	];
 });
 {% endhighlight %}
-And then, in order to utilize the controller in your page, do the following:
+
+And then, in order to utilize the controller in your page, do the following in your html:
+
 {% highlight html linenos%}
 <body ng-controller="injectCtrl">
 		<p ng-repeat="item in data">{% raw %}
@@ -29,31 +31,31 @@ And then, in order to utilize the controller in your page, do the following:
 		{% endraw %}</p>
 </body>
 {% endhighlight %}
+
 Notice that the ng-controller is defined to simply be the controller name, and that we do need need to reference the controller in order to access data. In order to test this controller using Karma, we would have to run the following test:
 
 {% highlight javascript linenos%}
 describe('injectCtrl', function(){
 
-  beforeEach(module('controllerExample'));
+	beforeEach(module('controllerExample'));
 
-  it('should create data model with 3 items', inject(function($controller) {
-    var scope = {},
-        ctrl = $controller('injectCtrl', {$scope:scope});
-
-    expect(scope.data.length).toBe(3);
+	it('should create data model with 3 items', inject(function($controller) {
+		var scope = {},
+		ctrl = $controller('injectCtrl', {$scope:scope});
+		expect(scope.data.length).toBe(3);
   }));
-
 });
 
 {% endhighlight %}
 
 This method, despite being the more popular option, can lead to a number of problems due to scope issues (you can read [here][understanding_scopes] for more information about these scope issues), and thus I prefer to not use it if I can.
 
-2. Controller-as convention
+2. "Controller-as" Convention
 ---------------------------
-This method, used in te 
+This convention, used in the [Code School free course][angular_codeschool], allows you to avoid many of the problems associated with scope in Angular. To utilize this declaration, simply follow the following convention in your module:
+
 {% highlight javascript linenos%}
-// app.js - controller-as example
+// app.js
 var app = angular.module('controllerAsExample',[]);
 app.controller('asCtrl', function(){
 	this.data = [
@@ -62,23 +64,32 @@ app.controller('asCtrl', function(){
 });
 {% endhighlight %}
 
+... and the following convention in your html file:
+
 {% highlight html linenos%}
-<!doctype html>
-<html lang="en" ng-app="phonecatApp">
-<head>
-	...
-	<script src="js/controllers.js"></script>
-</head>
-<body ng-controller="PhoneListCtrl as phoneList">
-		<p ng-repeat="phone in phoneList.phones">
-			{{phone.name}}
-		</p>
+<body ng-controller="asCtrl as controllerNick">
+		<p ng-repeat="item in controllerNick.data">{% raw %}
+			{{item.name}}
+		{% endraw %}</p>
 </body>
-</html>
 {% endhighlight %}
 
+Notice that in the html file, we needed to access data by calling "controllerNick.data", instead of just using "data" as in the previous convention.
+In order to test this convention in Karma, use the following convention:
 
+{% highlight javascript linenos%}
+describe('asCtrl', function(){
 
+	beforeEach(module('controllerAsExample'));
+
+	it('should create data model with 3 items', inject(function($controller) {
+		ctrl = $controller('asCtrl', {});
+		expect(scope.data.length).toBe(3);
+	}));
+});
+{% endhighlight %}
+
+And that's all there is to it! You simply don't inject the $scope into the $controller in the second use case, and your unit tests will work exactly as you expect!
 
 [angularjs]:    https://angularjs.org/
 [angular_tutorial]:    https://docs.angularjs.org/tutorial
